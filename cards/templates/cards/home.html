@@ -1,0 +1,93 @@
+{% extends 'cards/base.html' %}
+
+{% block title %}
+Home | E-Card
+{% endblock %}
+
+
+{% block content %}
+
+<section class="hero">
+
+    <div>
+
+        <p>
+            MAKE YOUR MOMENTS SPECIAL
+        </p>
+
+        <h1>
+            Beautiful Digital
+            <br>
+            E-Cards
+        </h1>
+
+        <p>
+            Create beautiful invitation cards
+            for birthdays, weddings and
+            special occasions.
+        </p>
+
+        <a
+            href="{% url 'card_list' %}"
+            class="btn">
+
+            Explore Cards
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<section class="section">
+
+    <h2>
+        Latest E-Cards
+    </h2>
+
+
+    <div class="card-grid">
+
+        {% for card in cards %}
+
+        <div class="card">
+
+            {% if card.image %}
+
+            <img
+                src="{{ card.image.url }}"
+                alt="{{ card.title }}">
+
+            {% endif %}
+
+            <h3>
+                {{ card.title }}
+            </h3>
+
+            <p>
+                {{ card.category }}
+            </p>
+
+            <a
+                href="{% url 'card_detail' card.pk %}">
+
+                View Card
+
+            </a>
+
+        </div>
+
+        {% empty %}
+
+        <p>
+            No cards available yet.
+        </p>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

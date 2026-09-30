@@ -1,0 +1,55 @@
+{% extends 'cards/base.html' %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+<section class="form-section">
+
+    <div class="form-card">
+
+        <h1>
+            {{ title }}
+        </h1>
+
+        <p>
+            Fill the details below to create your E-Card.
+        </p>
+
+
+        <form
+            method="POST"
+            enctype="multipart/form-data">
+
+            {% csrf_token %}
+
+
+            {{ form.as_p }}
+
+
+            <button
+                type="submit"
+                class="btn">
+
+                Save Card
+
+            </button>
+
+
+            <a
+                href="{% url 'card_list' %}"
+                class="cancel">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

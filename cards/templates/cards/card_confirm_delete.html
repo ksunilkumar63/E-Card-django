@@ -1,0 +1,53 @@
+{% extends 'cards/base.html' %}
+
+{% block title %}
+Delete Card
+{% endblock %}
+
+{% block content %}
+
+<section class="form-section">
+
+    <div class="form-card delete-card">
+
+        <h1>
+            Delete E-Card
+        </h1>
+
+        <p>
+            Are you sure you want to delete
+            <strong>{{ card.title }}</strong>?
+        </p>
+
+        <p>
+            This action cannot be undone.
+        </p>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <button
+                type="submit"
+                class="btn delete-btn">
+
+                Yes, Delete
+
+            </button>
+
+            <a
+                href="{% url 'card_detail' card.pk %}"
+                class="cancel">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

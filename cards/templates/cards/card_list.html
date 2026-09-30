@@ -1,0 +1,102 @@
+{% extends 'cards/base.html' %}
+
+{% block title %}
+All E-Cards
+{% endblock %}
+
+{% block content %}
+
+<section class="section">
+
+    <div class="page-heading">
+        <h1>Our E-Cards</h1>
+
+        <p>
+            Choose a beautiful card for your special moment.
+        </p>
+
+        <a href="{% url 'card_create' %}" class="btn">
+            + Create New Card
+        </a>
+    </div>
+
+
+    <div class="card-grid">
+
+        {% for card in cards %}
+
+        <div class="card">
+
+            {% if card.image %}
+
+            <img
+                src="{{ card.image.url }}"
+                alt="{{ card.title }}">
+
+            {% else %}
+
+            <div class="no-image">
+                💌
+            </div>
+
+            {% endif %}
+
+
+            <div class="card-body">
+
+                <span class="category">
+                    {{ card.category }}
+                </span>
+
+                <h3>
+                    {{ card.title }}
+                </h3>
+
+                <p>
+                    {{ card.description|truncatewords:15 }}
+                </p>
+
+                <h4>
+                    ₹{{ card.price }}
+                </h4>
+
+
+                <a
+                    href="{% url 'card_detail' card.pk %}"
+                    class="btn">
+
+                    View Card
+
+                </a>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="empty">
+
+            <h2>No E-Cards Found</h2>
+
+            <p>
+                Create your first E-Card.
+            </p>
+
+            <a
+                href="{% url 'card_create' %}"
+                class="btn">
+
+                Create Card
+
+            </a>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}
